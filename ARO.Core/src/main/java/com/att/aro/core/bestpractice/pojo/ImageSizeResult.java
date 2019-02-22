@@ -1,0 +1,97 @@
+/*
+ *  Copyright 2014 AT&T
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+package com.att.aro.core.bestpractice.pojo;
+
+import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+
+public class ImageSizeResult extends AbstractBestPracticeResult {
+	@JsonIgnore
+	private List<ImageSizeEntry> results = null;
+	@JsonIgnore
+	private int deviceScreenSizeRangeX = 0;
+	@JsonIgnore
+	private int deviceScreenSizeRangeY = 0;
+	@JsonIgnore
+	private String exportNumberOfLargeImages;
+	
+	@Override
+	public BestPracticeType getBestPracticeType() {
+		return BestPracticeType.IMAGE_SIZE;
+	}
+
+	public List<ImageSizeEntry> getResults() {
+		return results;
+	}
+
+	public void setResults(List<ImageSizeEntry> results) {
+		this.results = results;
+	}
+	public int getDeviceScreenSizeRangeX() {
+		return deviceScreenSizeRangeX;
+	}
+
+	public void setDeviceScreenSizeRangeX(int deviceScreenSizeRangeX) {
+		this.deviceScreenSizeRangeX = deviceScreenSizeRangeX;
+	}
+
+	public int getDeviceScreenSizeRangeY() {
+		return deviceScreenSizeRangeY;
+	}
+
+	public void setDeviceScreenSizeRangeY(int deviceScreenSizeRangeY) {
+		this.deviceScreenSizeRangeY = deviceScreenSizeRangeY;
+	}
+
+	public String getExportNumberOfLargeImages() {
+		return exportNumberOfLargeImages;
+	}
+
+	public void setExportNumberOfLargeImages(String exportNumberOfLargeImages) {
+		this.exportNumberOfLargeImages = exportNumberOfLargeImages;
+	}
+	
+	public int getErrorCount() {
+		return results != null ? results.size() : 0;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+}
+		if (obj == null || obj.getClass() != this.getClass()) {
+			return false;
+		}
+		ImageSizeResult other = (ImageSizeResult) obj;
+		if ((!other.getBestPracticeDescription().trim().equals(getBestPracticeDescription().trim()))
+				|| getResultType() != other.getResultType()) {
+			return false;
+		}
+		return true;
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + getBestPracticeDescription().hashCode();
+		result = prime * result + getBestPracticeType().hashCode();
+		return result;
+	}	
+}

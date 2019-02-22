@@ -1,0 +1,115 @@
+/*
+ *  Copyright 2014 AT&T
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+*/
+package com.att.aro.core.bestpractice.pojo;
+
+import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+
+public class FileCompressionResult extends AbstractBestPracticeResult{
+	private List<TextFileCompressionEntry> results;
+	private int noOfCompressedFiles;
+	private int noOfUncompressedFiles;
+	private int totalUncompressedSize;
+	@JsonIgnore
+	private String exportAll;
+	@JsonIgnore
+	private String exportAllKb;
+	
+	@Override
+	public BestPracticeType getBestPracticeType() {
+		return BestPracticeType.FILE_COMPRESSION;
+	}
+
+	public List<TextFileCompressionEntry> getResults() {
+		return results;
+	}
+	public void setResults(List<TextFileCompressionEntry> results) {
+		this.results = results;
+	}
+	public int getNoOfCompressedFiles() {
+		return noOfCompressedFiles;
+	}
+	public void setNoOfCompressedFiles(int noOfCompressedFiles) {
+		this.noOfCompressedFiles = noOfCompressedFiles;
+	}
+	public int getNoOfUncompressedFiles() {
+		return noOfUncompressedFiles;
+	}
+	public void setNoOfUncompressedFiles(int noOfUncompressedFiles) {
+		this.noOfUncompressedFiles = noOfUncompressedFiles;
+	}
+	public int getTotalUncompressedSize() {
+		return totalUncompressedSize;
+	}
+	public void setTotalUncompressedSize(int totalUncompressedSize) {
+		this.totalUncompressedSize = totalUncompressedSize;
+	}
+	public String getExportAll() {
+		return exportAll;
+	}
+	public void setExportAll(String exportAll) {
+		this.exportAll = exportAll;
+	}
+	public String getExportAllKb() {
+		return exportAllKb;
+	}
+	public void setExportAllKb(String exportAllKb) {
+		this.exportAllKb = exportAllKb;
+	}
+	
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
+		if (obj == null || obj.getClass() != this.getClass()) {
+			return false;
+		}
+		FileCompressionResult compressionResult = (FileCompressionResult) obj;
+		if (compressionResult.getNoOfCompressedFiles() != noOfCompressedFiles
+				|| compressionResult.getNoOfUncompressedFiles() != noOfUncompressedFiles) {
+			return false;
+		}
+		if (compressionResult.getTotalUncompressedSize() != totalUncompressedSize) {
+			return false;
+		}
+		if (!compressionResult.getResults().containsAll(results)) {
+			return false;
+		}
+		if ((!compressionResult.getBestPracticeDescription().trim().equals(getBestPracticeDescription().trim()))
+				|| getResultType() != compressionResult.getResultType()) {
+			return false;
+		}
+		return true;
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + noOfCompressedFiles;
+		result = prime * result + noOfUncompressedFiles;
+		result = prime * result + totalUncompressedSize;
+		for (TextFileCompressionEntry entry : results) {
+			result = prime * result + entry.hashCode();
+		}
+		result = prime * result + getBestPracticeDescription().hashCode();
+		result = prime * result + getBestPracticeType().hashCode();
+		return result;
+	}
+}

@@ -1,0 +1,188 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>com.att.aro</groupId>
+        <artifactId>vo-parent</artifactId>
+        <version>2.3.0</version>
+        <relativePath>../ARO.Parent</relativePath>
+    </parent>
+
+	<groupId>com.att.aro.analytics</groupId>
+	<artifactId>vo-analytics</artifactId>
+	<packaging>jar</packaging>
+	<name>VO Analytics</name>
+	<description>Google Analytics Library for ARO</description>
+
+	<properties>
+		<maven.deploy.skip>true</maven.deploy.skip>
+	</properties>
+	
+	<repositories>
+		<repository>
+			<id>central</id>
+			<name>MavenCentral Repository</name>
+			<url>http://repo1.maven.org/maven2</url>
+		</repository>
+		<repository>
+			<id>apache-snapshots</id>
+			<name>Apache Snapshot</name>
+			<url>https://repository.apache.org/content/repositories/snapshots/</url>
+		</repository>
+		<repository>
+			<id>sonatype-public</id>
+			<name>Sonatype Public</name>
+			<url>http://repository.sonatype.org/content/groups/public</url>
+		</repository>
+		<repository>
+			<id>sonatype-flex</id>
+			<name>Sonatype Flex</name>
+			<url>https://oss.sonatype.org/content/repositories/snapshots/</url>
+		</repository>
+	</repositories>
+	
+	<pluginRepositories>
+		<pluginRepository>
+			<id>central</id>
+			<name>MavenCentral Repository</name>
+			<url>http://repo1.maven.org/maven2</url>
+		</pluginRepository>	
+	</pluginRepositories>
+
+	<!-- dependencies -->
+	<dependencies>	
+    <dependency>
+        <groupId>com.att.aro</groupId>
+        <artifactId>vo-core</artifactId>
+        <version>2.3.0</version>
+    </dependency>	
+		<dependency>
+			<groupId>com.orientechnologies</groupId>
+			<artifactId>orientdb-core</artifactId>
+			<version>2.2.32</version>
+		</dependency>
+		<dependency>
+			<groupId>com.orientechnologies</groupId>
+			<artifactId>orientdb-object</artifactId>
+			<version>2.2.32</version>
+		</dependency>
+		<dependency>
+			<groupId>com.orientechnologies</groupId>
+			<artifactId>orientdb-server</artifactId>
+			<version>2.2.32</version>
+		</dependency>
+		<dependency>
+			<groupId>org.javassist</groupId>
+			<artifactId>javassist</artifactId>
+		</dependency>
+		 <dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-test</artifactId>
+			<version>4.0.3.RELEASE</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.proxy</groupId>
+			<artifactId>proxy-vole</artifactId>
+			<version>1.0</version>			
+		</dependency>		
+		<dependency>
+		    <groupId>org.codehaus.mojo</groupId>
+		    <artifactId>findbugs-maven-plugin</artifactId>
+		    <version>3.0.4</version>
+		</dependency>
+	</dependencies>
+
+	<!-- build -->
+	<build>
+		<plugins>
+
+			<!-- maven-jar-plugin -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-jar-plugin</artifactId>
+				<version>2.4</version>
+				<configuration>
+					<outputDirectory>${basedir}/libs</outputDirectory>
+					<archive>
+						<manifest>
+							<addClasspath>true</addClasspath>
+							<mainClass>${main.class}</mainClass>
+						</manifest>
+					</archive>
+				</configuration>
+			</plugin>
+          <plugin>
+              <artifactId>maven-dependency-plugin</artifactId>
+                  <executions>
+                      <execution>
+                          <phase>install</phase>
+                          <goals>
+                              <goal>copy-dependencies</goal>
+                          </goals>
+                          <configuration>
+                              <outputDirectory>${basedir}/libs</outputDirectory>
+                          </configuration>
+                      </execution>
+                  </executions>
+          </plugin>
+			<plugin>
+	            <groupId>org.codehaus.mojo</groupId>
+	            <artifactId>findbugs-maven-plugin</artifactId>
+	            <version>3.0.4</version>
+	            <configuration>
+	            	<excludeFilterFile>findbugs_exclude.xml</excludeFilterFile>
+	                <effort>Max</effort>
+	                <threshold>Max</threshold>
+	                <xmlOutput>true</xmlOutput>
+	                <findbugsXmlOutputDirectory>${project.build.directory}/findbugs</findbugsXmlOutputDirectory>
+	            </configuration>
+	            <executions>
+	                <execution>
+	                    <id>analyze-compile</id>
+	                    <!-- <phase>compile</phase> -->
+	                    <goals>
+	                        <goal>check</goal>
+	                    </goals>
+	                </execution>
+	            </executions>
+	        </plugin>			
+		</plugins>
+
+		<pluginManagement>
+			<plugins>
+				<!--This plugin's configuration is used to store Eclipse m2e settings only. It has no influence on the Maven build itself.-->
+				<plugin>
+					<groupId>org.eclipse.m2e</groupId>
+					<artifactId>lifecycle-mapping</artifactId>
+					<version>1.0.0</version>
+					<configuration>
+						<lifecycleMappingMetadata>
+							<pluginExecutions>
+								<pluginExecution>
+									<pluginExecutionFilter>
+										<groupId>
+											org.apache.maven.plugins
+										</groupId>
+										<artifactId>
+											maven-compiler-plugin
+										</artifactId>
+										<versionRange>
+											[2.1,)
+										</versionRange>
+										<goals>
+											<goal>compile</goal>
+										</goals>
+									</pluginExecutionFilter>
+									<action>
+										<ignore></ignore>
+									</action>
+								</pluginExecution>
+							</pluginExecutions>
+						</lifecycleMappingMetadata>
+					</configuration>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+	</build>
+</project>

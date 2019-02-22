@@ -1,0 +1,8 @@
+/target/
+/libs/
+/bin/
+/.classpath
+/.settings/
+/hs_err_pid*.log
+/VO.p12
+/VO.pem
