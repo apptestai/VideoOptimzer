@@ -24,7 +24,7 @@
 	<licenses>
 		<license>
 			<name>Apache v2</name>
-			<url>http://www.apache.org/licenses/LICENSE-2.0.html</url>
+			<url>https://www.apache.org/licenses/LICENSE-2.0.html</url>
 			<distribution>manual</distribution>
 		</license>
 	</licenses>
@@ -32,7 +32,7 @@
 		<pluginRepository>
 			<id>central</id>
 			<name>MavenCentral Repository</name>
-			<url>http://repo.maven.apache.org/maven2/</url>
+			<url>https://repo.maven.apache.org/maven2/</url>
 		</pluginRepository>
 	</pluginRepositories>
 

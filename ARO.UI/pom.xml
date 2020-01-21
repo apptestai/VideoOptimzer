@@ -26,7 +26,7 @@
 		<repository>
 			<id>central</id>
 			<name>MavenCentral Repository</name>
-			<url>http://repo1.maven.org/maven2</url>
+			<url>https://repo1.maven.org/maven2</url>
 		</repository>
 		<repository>
 			<id>apache.snapshots</id>
@@ -42,7 +42,7 @@
 		<repository>
 			<id>sonatype-public</id>
 			<name>Sonatype Public</name>
-			<url>http://repository.sonatype.org/content/groups/public</url>
+			<url>https://repository.sonatype.org/content/groups/public</url>
 		</repository>
 		<repository>
 			<id>sonatype-flex</id>
@@ -51,7 +51,7 @@
 		</repository>
 		<repository>
 			<id>jboss-earlyaccess-repository</id>
-			<url>http://maven.repository.redhat.com/earlyaccess/all/</url>
+			<url>https://maven.repository.redhat.com/earlyaccess/all/</url>
 			<releases>
 				<enabled>true</enabled>
 			</releases>
@@ -66,7 +66,7 @@
 		<pluginRepository>
 			<id>central</id>
 			<name>MavenCentral Repository</name>
-			<url>http://repo1.maven.org/maven2</url>
+			<url>https://repo1.maven.org/maven2</url>
 		</pluginRepository>
 	</pluginRepositories>
 

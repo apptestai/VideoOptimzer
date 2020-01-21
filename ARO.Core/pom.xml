@@ -87,7 +87,7 @@
 		</repository>
 		<repository>
 			<id>OSGeo</id>
-			<url>http://download.osgeo.org/webdav/geotools</url>
+			<url>https://download.osgeo.org/webdav/geotools</url>
 		</repository>
 	    <repository>
 			<id>Google</id>

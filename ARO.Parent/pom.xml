@@ -9,7 +9,7 @@
 	<packaging>pom</packaging>
 
 	<name>VO Parent</name>
-	<url>http://maven.apache.org</url>
+	<url>https://maven.apache.org</url>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -35,7 +35,7 @@
 			<repository>
 				<id>sonatype-public</id>
 				<name>Sonatype Public</name>
-				<url>http://repository.sonatype.org/content/groups/public</url>
+				<url>https://repository.sonatype.org/content/groups/public</url>
 			</repository>
 			<repository>
 				<id>sonatype-flex</id>
