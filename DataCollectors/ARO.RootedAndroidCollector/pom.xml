@@ -21,7 +21,7 @@
 	<licenses>
 		<license>
 			<name>Apache v2</name>
-			<url>http://www.apache.org/licenses/LICENSE-2.0.html</url>
+			<url>https://www.apache.org/licenses/LICENSE-2.0.html</url>
 			<distribution>manual</distribution>
 		</license>
 	</licenses>
@@ -29,7 +29,7 @@
 		<repository>
 			<id>central</id>
 			<name>MavenCentral Repository</name>
-			<url>http://repo1.maven.org/maven2</url>
+			<url>https://repo1.maven.org/maven2</url>
 		</repository>
 		<repository>
 			<id>apache-snapshots</id>
@@ -45,7 +45,7 @@
 		<repository>
 			<id>sonatype-public</id>
 			<name>Sonatype Public</name>
-			<url>http://repository.sonatype.org/content/groups/public</url>
+			<url>https://repository.sonatype.org/content/groups/public</url>
 		</repository>
 		<repository>
 			<id>sonatype-flex</id>
@@ -58,7 +58,7 @@
 		<pluginRepository>
 			<id>central</id>
 			<name>MavenCentral Repository</name>
-			<url>http://repo1.maven.org/maven2</url>
+			<url>https://repo1.maven.org/maven2</url>
 		</pluginRepository>
 	</pluginRepositories>
 	<dependencies>
