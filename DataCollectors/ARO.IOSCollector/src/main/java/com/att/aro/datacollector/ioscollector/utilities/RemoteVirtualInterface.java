@@ -174,10 +174,26 @@ public class RemoteVirtualInterface {
 		// TODO needs to handle multiple device serialnumbers
 		String response = null;
 		try {
+			// MODIFIED BY MO: Keep trying until the specific device(serialNumber) is disconnected.(Max 30 counts)
+			// do {
+			// 	rviConnection("-x", serialNumber);
+			// 	response = runner.runCmd(rviPath + " -l");
+			// } while (!response.trim().equals("Could not get list of devices"));
+			int max = 30;
 			do {
 				rviConnection("-x", serialNumber);
 				response = runner.runCmd(rviPath + " -l");
-			} while (!response.trim().equals("Could not get list of devices"));
+				// response:
+				// Current Active Devices:
+				//
+				// 	[1] {udid} with interface rvi0
+				//
+				// or 
+				//  Could not get list of devices
+				LOG.info("List of rvi devices: " + response.replaceFirst("\n", ""));
+				max--;
+			} while (response.contains(serialNumber) && max > 0);
+			/////////////
 		} catch (IOException e) {
 			LOG.error("IOException", e);
 		}
@@ -213,7 +229,10 @@ public class RemoteVirtualInterface {
 		initDate = startDate;
 		startCaptureDate = startDate;
 		
-		dumpcapExecutor = new ExternalDumpcapExecutor(this.pcapfilepath, sudoPassword, this.runner);
+		//MODIFIED BY MO: add rviName as a param
+		// dumpcapExecutor = new ExternalDumpcapExecutor(this.pcapfilepath, sudoPassword, this.runner);
+		dumpcapExecutor = new ExternalDumpcapExecutor(this.rviName, this.pcapfilepath, sudoPassword, this.runner);
+		/////////////////////
 		dumpcapExecutor.start();
 		
 		LOG.info("************  Tcpdump started in background. ****************");

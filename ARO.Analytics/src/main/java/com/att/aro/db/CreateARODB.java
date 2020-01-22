@@ -28,7 +28,11 @@ import com.orientechnologies.orient.object.db.OObjectDatabaseTx;
  * , if exist we don't want to run two instance of it, it will keep Analyzer from starting.
  */
 public class CreateARODB {
-	private String dbFolder = System.getProperty( "user.home" ) + "/orient/db";
+	// MODIFIED BY MO: can pass db home path with env variable.
+	// private String dbFolder = System.getProperty( "user.home" ) + "/orient/db";
+	private String dbHome = System.getenv("VIDEOOPTIMZER_ARO_DB") == null ? System.getProperty( "user.home" ) : System.getenv("VIDEOOPTIMZER_ARO_DB");
+	private String dbFolder =  dbHome + "/orient/db";
+	//////////////////
 	//this file is created when a new instance of ODatabaseObject is created
 	private String runningFile = dbFolder + "/db.wmr";
 	private String url =  "plocal:" + dbFolder;

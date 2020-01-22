@@ -40,18 +40,32 @@ public class ExternalDumpcapExecutor extends Thread implements IExternalProcessR
 	volatile boolean shutdownSignal = false;
 	int totalpacketCaptured = 0;
 	List<Integer> pidlist;
+	// ADDED BY MO: add rviName as a field
+	String rviName;
 
-	public ExternalDumpcapExecutor(String pcappath, String sudopass, ExternalProcessRunner runner) throws Exception {
+	// MODIFIED BY MO: add rviName as a param
+	// public ExternalDumpcapExecutor(String pcappath, String sudopass, ExternalProcessRunner runner) throws Exception {
+	// 	this.pcappath = pcappath;
+	// 	this.sudoPassword = sudopass;
+	// 	this.runner = runner;
+	// 	pidlist = new ArrayList<Integer>();
+	// }	
+	public ExternalDumpcapExecutor(String rviName, String pcappath, String sudopass, ExternalProcessRunner runner) throws Exception {
+		this.rviName = rviName;
 		this.pcappath = pcappath;
 		this.sudoPassword = sudopass;
 		this.runner = runner;
 		pidlist = new ArrayList<Integer>();
 	}
+	//////////////////
 
 	@Override
 	public void run() {
 		LOG.debug("run");
-		dumpcapCommand = "echo " + this.sudoPassword + " | sudo -S " + Util.getDumpCap() + " -P -i rvi0 -s 0 -Z none -w \"" + this.pcappath + "\"";
+		//MODIFIED BY MO: apply rviName to interface of dumpcap
+		// dumpcapCommand = "echo " + this.sudoPassword + " | sudo -S " + Util.getDumpCap() + " -P -i rvi0 -s 0 -Z none -w \"" + this.pcappath + "\"";		
+		dumpcapCommand = "echo " + this.sudoPassword + " | sudo -S " + Util.getDumpCap() + " -P -i " + this.rviName + " -s 0 -Z none -w \"" + this.pcappath + "\"";
+		//////////////////
 		String[] cmds = new String[] { "bash", "-c", dumpcapCommand };
 
 		ProcessBuilder builder = new ProcessBuilder(cmds);
