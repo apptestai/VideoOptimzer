@@ -805,8 +805,12 @@ public class NorootedAndroidCollectorImpl implements IDataCollector, IVideoImage
 		}
 		if (gotlocalapk) {
 			try {
-				device.installPackage(filepath, true);
-				LOG.debug("installed apk in device");
+				// MODIFIED BY MO: Grant all permissions listed in the app manifest.
+				// device.installPackage(filepath, true);
+				// LOG.debug("installed apk in device");
+				device.installPackage(filepath, true, "-g");
+				LOG.debug("installed apk in device with -g option");
+				//////////////////////////////////////////////				
 				filemanager.deleteFile(filepath);
 			} catch (InstallException e) {
 				LOG.error(e.getMessage());
