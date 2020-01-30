@@ -394,6 +394,9 @@ public class NorootedAndroidCollectorImpl implements IDataCollector, IVideoImage
 		String location = "";
 		String selectedAppName = "";
 		Orientation videoOrientation = Orientation.PORTRAIT;
+		// ADDED BY MO: add an option to use UiXmlCapture of vpn_android collector.
+		boolean useUiCapture = true;
+		/////////////////////////////////////////////////////////////////////////
 		
 		if (extraParams != null) {
 			atnr = (AttenuatorModel)getOrDefault(extraParams, "AttenuatorModel", atnr);
@@ -404,6 +407,9 @@ public class NorootedAndroidCollectorImpl implements IDataCollector, IVideoImage
 			traceType = (String) getOrDefault(extraParams, "traceType", StringUtils.EMPTY);
 			targetedApp = (String) getOrDefault(extraParams, "targetedApp", StringUtils.EMPTY);
 			appProducer = (String) getOrDefault(extraParams, "appProducer", StringUtils.EMPTY);
+			// ADDED BY MO: add an option to use UiXmlCapture of vpn_android collector.
+			useUiCapture = ((String) getOrDefault(extraParams, "uiCapture", "yes")).equals("no") ? false : true;
+			/////////////////////////////////////////////////////////////////////////
 		}
 		
 		int bitRate = videoOption.getBitRate();
@@ -539,7 +545,12 @@ public class NorootedAndroidCollectorImpl implements IDataCollector, IVideoImage
 			startVideoCapture();
 		}
 		startUserInputCapture();
-		startUiXmlCapture();
+		// MODIFIED BY MO: add an option to use UiXmlCapture of vpn_android collector.
+		// startUiXmlCapture();
+		if (useUiCapture) {
+			startUiXmlCapture();
+		}
+		//////////////////////////////////////////////////////////////////////////
 		if(atnrProfile){
 			startAttnrProfile(location);// wait for vpn collection start		
 		}

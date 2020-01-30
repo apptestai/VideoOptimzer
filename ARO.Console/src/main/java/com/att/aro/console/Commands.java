@@ -64,7 +64,20 @@ public class Commands {
 	private String throttleDL = "-1";
 	
 	@Parameter(names="--profile", description="provide profile location")
-	private String attenuationprofile = null;	
+	private String attenuationprofile = null;
+	
+	// ADDED BY MO: add an option to use UiXmlCapture of vpn_android collector.
+	@Parameter(names="--uiCapture", description="yes or no - used with vpn_android collector. dump ui xml using uiautomator dump command.")
+	private String uiCapture = "yes";
+	
+	public String getUiCapture() {
+		return uiCapture;
+	}
+
+	public void setUiCapture(String uiCapture) {
+		this.uiCapture = uiCapture;
+	}
+	//////////////////////////////////////////////////////////////////////////
  	
 	
 	public boolean isListcollector() {

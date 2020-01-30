@@ -509,7 +509,9 @@ public final class Application implements IAROView {
 			IDataCollectorManager colmg = context.getBean(IDataCollectorManager.class);
 			colmg.getAvailableCollectors(context);
 			IDataCollector collector = null;
-			
+			// ADDED BY MO: add an option to use UiXmlCapture of vpn_android collector.
+			Hashtable<String,Object> extras = new Hashtable<String,Object>();
+			/////////////////////////////////////////////////////////////////////////
 			switch (cmds.getStartcollector()) {
 			case "rooted_android":
 				collector = colmg.getRootedDataCollector();
@@ -517,6 +519,9 @@ public final class Application implements IAROView {
 				
 			case "vpn_android":
 				collector = colmg.getNorootedDataCollector();
+				// ADDED BY MO: add an option to use UiXmlCapture of vpn_android collector.
+				extras.put("uiCapture", cmds.getUiCapture());
+				/////////////////////////////////////////////////////////////////////////
 				break;
 				
 			case "ios":
@@ -563,7 +568,9 @@ public final class Application implements IAROView {
 			}
 			videoOption = configureVideoOption(cmds.getVideo());			
 			try {
-				Hashtable<String,Object> extras = new Hashtable<String,Object>();
+				// MODIFIED BY MO: add an option to use UiXmlCapture of vpn_android collector.
+				// Hashtable<String,Object> extras = new Hashtable<String,Object>();
+				//////////////////////////////////////////////////////////////////////////
 				extras.put("video_option", getVideoOption());
 				extras.put("AttenuatorModel", model);
 				result = runCommand(cmds, collector, cmds.getSudo(), extras);
@@ -718,6 +725,7 @@ public final class Application implements IAROView {
 				.append("\nUsage: vo [commands] [arguments]")
 				.append("\n  --analyze [trace location]: analyze a trace folder or file.")
 				.append("\n  --startcollector [rooted_android|vpn_android|ios]: run a collector.")
+				.append("\n  --uiCapture [yes/no]: used with vpn_android collector. dump ui xml using uiautomator dump command. Default: yes.")
 				.append("\n  --ask [auto|rooted_android|vpn_android|ios]: asks for a device then runs the collector.")
 				.append("\n  --output [fullpath including filename] : output to a file or trace folder")
 				.append("\n  --overwrite [yes/no] : overwrite a trace folder - optional - will default to no if not specified")
