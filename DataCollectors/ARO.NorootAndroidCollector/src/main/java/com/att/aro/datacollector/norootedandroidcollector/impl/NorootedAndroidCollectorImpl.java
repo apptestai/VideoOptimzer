@@ -886,7 +886,13 @@ public class NorootedAndroidCollectorImpl implements IDataCollector, IVideoImage
 		if(this.attnrScriptRun){
 			attnr.stopAtenuationScript(this.device);
 		}
-		uiXmlCollector.stopUiXmlCapture(this.device);
+		// MODIFIED BY MO: add an option to use UiXmlCapture of vpn_android collector.
+		// uiXmlCollector.stopUiXmlCapture(this.device);
+		if(this.uiXmlCollector != null) {
+			this.uiXmlCollector.stopUiXmlCapture(this.device);
+		}
+		/////////////////////////////////////////////////////////////////////////////
+		
 		LOG.debug("pulling trace to local dir");
 		new LogcatCollector(adbService, device.getSerialNumber()).collectLogcat(localTraceFolder, "Logcat.log");
 		result = pullTrace(this.mDataDeviceCollectortraceFileNames);
